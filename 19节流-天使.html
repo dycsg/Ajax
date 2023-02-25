@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #angel {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="./img/天使.jpg" alt="" id="angel">
+
+    <script>
+        // jQuery实现
+        $(function () {
+            var angel = $('#angel');
+
+            var timer = null            //1.定义节流阀  等于null
+
+            $(document).on("mousemove", function (e) {
+
+                if (timer) {return}     //判断节流阀是否为空 如果不为空就证明上次执行间隔不足16秒 返回
+
+                timer = setTimeout(function () {       //2、定义延迟器
+
+                    console.log("ok");
+                    $(angel).css('left', e.pageX - 40 + 'px').css('top', e.pageY - 40 + 'px')
+
+                    timer = null                //3.完成了后就清空节流阀 
+
+                }, 16)
+
+            })
+        })
+    </script>
+</body>
+
+</html>

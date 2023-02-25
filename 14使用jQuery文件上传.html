@@ -12,10 +12,21 @@
 <body>
     <input type="file" id="file1">
     <button id="btnUpload">上传文件</button>
-    <img src="./img/jz.gif" alt="" id="loading">
+    <img src="./img/jz.gif" alt="" id="loading" style="display: none;">
 
     <script>
         $(function () {
+
+            // 监听到Ajax请求被发起事件
+            $(document).ajaxStart(function () {
+                $('#loading').show()     //显示
+            })
+
+            // 监听到Ajax 完成的事件
+            $(document).ajaxStop(function(){
+                $('#loading').hide()     //隐藏
+            })
+
             // 添加点击事件
             $("#btnUpload").on('click', function () {
                 // 获取元素 再把jQuery元素转换成DOM 元素
@@ -37,9 +48,7 @@
                     processData: false,     //重要 一定要写
                     contentType: false,     //重要 一定要写
                     success: function (res) {
-                        $(document).ajaxStart(function () {
-                            $('#loading').show()
-                        })
+                        
                     }
 
                 })

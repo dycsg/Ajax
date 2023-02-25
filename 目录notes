@@ -68,3 +68,66 @@ json数据类型   必须用花括号{}
     "hobby": ["吃饭", "睡觉", "打豆豆"],
     //不能有函数
 }
+
+
+防抖 当事件被触发后 延迟n秒 再执行回调 如果在这n秒内事件又被触发 则重新计时 
+
+git 命令
+配置用户信息
+git config --global user.name "dyc"
+git config --global user.meail "dingyangcai@163.com"
+
+查看配置信息
+git config --list --global
+
+查看文件状态
+git status
+git status -s
+
+添加跟踪文件     再查看文件状态 status
+git add 文件名  
+
+向暂存区一次性提交多个文件
+git add .
+
+提交更新         再查看文件状态 status
+git commit -m "新建了文件"
+
+撤销对文件的修改   有危险
+git checkout -- 文件名
+
+移除暂存区的文件
+git reset HEAD 文件名
+
+跳过暂存直接提交更新
+git commit -a -m "提交了文件"
+
+从 git 仓库中和工作区同时移除文件 
+git rm -f 文件名
+
+从git 仓库中移除文件 保留工作区的文件
+git rm --cached 文件名
+
+https上传文件到远程仓库
+git push
+
+shh上传文件到远程仓库  三次回车   复制C:\Users\35011\.ssh 下的id_rsa.pub文件 复制 GitHub网站找到头像 ssh证书 添加
+shh-keygen -t rsa -b 4096 -C "3501194074@qq.com"
+git push
+查看是否配置成功
+ssh -T git@github.com
+
+将远程仓库的文件下载到本地
+git clone 地址
+
+查看分支列表  *表示当前所处的分支
+git branch
+
+创建分支         注意：创建完后当前处在master主分支上，不会跳转
+git branch 分支名(login)
+
+切换分支
+git checkout 分支名称
+
+创建分支并切换到其分支
+git checkout -b 分支名称

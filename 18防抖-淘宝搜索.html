@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/template-web.js"></script>
+    <style>
+        .box {
+            width: 500px;
+            height: 500px;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50% -50%);
+            background-color: cornsilk;
+        }
+
+        #searchInp {
+            width: 220px;
+            height: 35px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <input type="text" placeholder="请输入想要的商品" id="searchInp">
+        <div class="suggest-list"></div>
+    </div>
+
+
+    <!-- 模板引擎 搜索建议模板结构 -->
+    <script type="text/html" id="tpl-suggestList">
+        <!-- 循环 result接口提供的-->
+        {{each result}}
+    <!-- 模板建议项 先创建div加类名 放内容-->
+    <div class="suggest-item">{{$value[0]}}</div>
+    {{/each}}
+    </script>
+
+
+
+    <script>
+        // jquery
+        $(function () {
+
+            // 1.1.定义延迟器id
+            var timer = null;
+            // 1.2定义全局缓存对象
+            var cacheObj = null
+
+            // 定义防抖函数
+            function debouncedSearch(kw) {
+                timer = setTimeout(function () {
+                    getSuggestList(kw)
+                }, 500)
+            }
+
+
+            // 1.为搜索框绑定keyup事件
+            $('#searchInp').on('keyup', function () {
+                //防抖 清空timer
+                clearTimeout(timer);
+
+                // 获取它的value
+                var keyWords = $(this).val().trim()
+                // 判断
+                if (keyWords.length <= 0) {
+                    // 如果关键词为空，清空隐藏搜索建议列表
+                    return $('#suggest-list').empty().hide();
+                }
+
+                // 先判断缓存中是否有数据
+                if (cacheObj[keyWords]) {
+                    return getSuggestList(cacheObj[keyWords])
+                }
+
+                // console.log(keyWords);
+                // 再调用函数  获取搜索列表
+                // getSuggestList(keyWords)
+            })
+
+            function getSuggestList(kw) {
+                $.ajax({
+                    url: 'https://api-gw.onebound.cn/taobao/item_get' + kw,
+                    // url: 'https://suggest.taobao.com/sug?q=' + kw,   //淘宝接口
+                    datatype: 'jsonp',
+                    success: function (res) {
+                        // console.log(res);
+                        // 再调用下面函数
+                        renderSuggestList(res)
+                    }
+                })
+            }
+            // 渲染建议列表
+            function renderSuggestList(res) {
+                //如果没有需要渲染的数据 则直接return 清空数据 隐藏
+                if (res.result.length <= 0) {
+                    return $('#suggest-list').empty().hide()
+                }
+                // 渲染模板引擎结构
+                var htmlStr = template('tpl-suggestList', res)  //调用template 加接口数据
+                $('#suggest-list').html(htmlStr).show()    // 渲染显示出来
+
+                // 获取用户输入的内容，当做键
+                var k = $('#searchInp').val().trim();
+                // 需要将数据作为值，进行缓存
+                cacheObj[k] = res
+            }
+        })
+    </script>
+</body>
+
+</html>
