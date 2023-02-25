@@ -1,0 +1,29 @@
+.box{
+    width: 50%;
+    height: 30%;
+    border: 1px solid #bbb;
+    display: flex;
+}
+.box img{
+    width: 30%;
+    height: 100%;
+    background-color: #bbb;
+}
+.box .boxs{
+    margin-left: 15px;
+}
+.boxs .max{
+    margin-top: 40px;
+}
+.max span{
+    padding-right: 12px;
+}
+.boxs .min{
+    margin-top: 40px;
+}
+.min span{
+    padding-right: 12px;
+}
+.min .pls{
+    float: right;
+}

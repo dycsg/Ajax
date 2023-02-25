@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <style>
+
+    </style>
+</head>
+
+<body style="padding: 15px;">
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">发布评论</h3>
+        </div>
+        <form class="panel-body" id="FormAddCmt">
+            <div>评论人：</div>
+            <input type="text" class="form-control" id="inpname" name="username">
+            <div>评论内容：</div>
+            <textarea class="form-control" id="textarea" name="content"></textarea>
+            <button type="submit" id="submit">发布评论</button>
+        </form>
+    </div>
+    <ul class="list-group" id="cmt-list">
+        <li class="list-group-item">
+            <span class="badge" style="background-color: aqua;">评论时间：</span>
+            <span class="badge" style="background-color: rgb(228, 228, 51);">评论人：</span>
+            Item 1
+        </li>
+    </ul>
+    <script src="./js/jquery.min.js"></script>
+    <script>
+        $(function () {
+            function getCommentList() {
+                $.ajax({
+                    method: 'get',
+                    url: 'http://www.liulongbin.top:3006/api/cmtlist',
+                    success: function (res) {
+                        if (res.status !== 200) return alert('获取列表失败')
+                        // console.log('获取列表成功');
+
+                        var rows = []
+                        $.each(res.data, function (i, item) {
+                            var str = '<li class="list-group-item"><span class="badge" style="background-color: aqua;">评论时间：' + item.time + '</span><span class="badge" style="background-color: rgb(228, 228, 51);">评论人：' + item.username + '</span>' + item.content + '</li>'
+                            rows.push(str)
+                        })
+                        $('#cmt-list').empty().append(rows.join(''))
+                    }
+                })
+            }
+            getCommentList();
+
+            // 发布模块   注意一定要给元素添加name属性
+            $(function () {
+                $("#FormAddCmt").submit(function (e) {
+                    e.preventDefault();
+                    // 阻止跳转
+                    var data = $(this).serialize()
+                    // console.log(data);
+                    $.post('http://www.liulongbin.top:3006/api/addcmt', data,
+                        function (res) {
+                            if (res.status !== 201) {
+                                return alert("发布评论失败")
+                            }
+                            getCommentList()
+                            // $('#FormAddCmt')[0]    这个是将jQuery对象 转换成 原生js对象
+                            $('#FormAddCmt')[0].reset()
+                        })
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

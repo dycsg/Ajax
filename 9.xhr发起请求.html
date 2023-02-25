@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.发起get请求
+
+        // 创建  xhr
+        var xhr = new XMLHttpRequest();
+        // 调用open函数    如果要带参数就用？号    多个用&            
+        xhr.open('GET', 'http://www.liulongbin.top:3006/api/getbooks')
+        // xhr.open('GET', 'http://www.liulongbin.top:3006/api/getbooks?id=1&bookname=西游记')      //带参数
+        // 发起调用send函数
+        xhr.send();
+        // 监听onreadystatechange事件
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {    //固定的判段条件
+                // 获取响应回来的数据
+                console.log(xhr.statusText);
+            }
+        }
+
+        // 2.发起post请求
+        // 创建  xhr
+        var xhr = new XMLHttpRequest();
+        // 调用open函数   
+        xhr.open('POST', 'http://www.liulongbin.top:3006/api/addbook')             //固定写法
+        // 设置Content-Type
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')   //固定写法
+        xhr.send('bookname=水五钻&author=当年的&publisher=天玑出版社')
+        shr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.statusText);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

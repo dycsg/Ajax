@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 容器 -->
+    <div id="user-box"></div>
+
+    <!-- 定义模板 -->
+    <script type="text/html" id="tpl-user">
+        <div>姓名：{{name}}</div>
+        <div>年龄：{{age}}</div>
+        <div>性别：{{gender}}</div>
+        <div>住址：{{address}}</div>
+    </script>
+
+    <script>
+        // 定义数据
+        var data = { name: 'zs', age: '18', gender: '男', address: '南昌安义'}
+
+        // 调用模板引擎
+        var htmlStr = template('tpl-user', data)  //把前面的和后面的调用起来 赋值
+
+        // 获取 渲染HTML结构
+        document.getElementById('user-box').innerHTML = htmlStr
+    </script>
+    <script>
+        // 模板函数
+        function template(id, data) {
+             var str = document.getElementById(id).innerHTML
+             var pattern = /{{\s*([a-zA-Z]+)\s*}}/        // 斜线s* 空格
+
+             var pattResult = null   
+             while(pattResult = pattern.exec(str)){
+                str = str.repeat(pattResult[0], data[pattResult[1]])
+             }
+             return str
+        }
+    </script>
+</body>
+</html>

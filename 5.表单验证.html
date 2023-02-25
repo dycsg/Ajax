@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <form action="/login" id="f1">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="checkbox" checked >
+        <button type="submit">提交</button>
+    </form>
+    <script src="./js/jquery.min.js"></script>
+    <script>
+        $(function() {
+            // $("#f1").submit(function() {
+            //     alert('第一种方式监听提交')
+            // });
+
+            $('#f1').on('submit', function(e) {
+                alert('第二种方式监听提交')
+                // 阻止跳转 add形参 e
+                e.preventDefault();
+                //serialize 快速获取用户输入的值 DOM里必须要add name属性
+                var date = $(this).serialize()
+                console.log(date);
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // json转js  反序列化
+        var jsonstr = '{"a": "1", "b": "2", "c": "3"}'    //这是json字符串
+        var obj = JSON.parse(jsonstr) //转换
+        console.log(obj);  
+
+        // js转json  序列化 
+        var objs = {1: '4', b: '5', c: '6',}
+        var str = JSON.stringify(objs)
+        console.log(str);    //{"1":"4","b":"5","c":"6"}
+        console.log(typeof str);  //string
+
+
+        // 应用场景
+        var xhr  = new XMLHttpRequest()
+        xhr.open('GET', 'http://www.liulongbin.top:3006/api/getbooks')
+        xhr.send()
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4 && xhr.status === 200){
+                console.log(xhr.responseText);
+                console.log(typeof xhr.responseText);
+                // 这里转换
+                var res = JSON.parse(xhr.responseText)
+                console.log(res);
+            }
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery.min.js"></script>
+</head>
+
+<body>
+    <input name="aaa" type="hidden" value="111" />
+    <input name="bbb" type="hidden" value="222" />
+    <input name="ccc" type="hidden" value="333" />
+    <input name="ddd" type="hidden" value="444" />
+    <script>
+        var arr1 = ["aaa", "bbb", "ccc"];
+        $.each(arr1, function (i, val) {
+            console.info(i); //这里是索引值，将输出0，1，2
+            console.info(val); //这里是元素值，将输出aaa，bbb，ccc
+        });
+
+
+        // 遍历json数据
+        var obj = { one: 1, two: 2, three: 3 };
+        each(obj, function (key, val) {
+            console.info(key);  //将输出one two three
+            console.info(val);  //将输出1，2，3 这个val等同于obj[key]
+        });
+
+
+        // 遍历二维数组
+        var arr2 = [['a', 'aa', 'aaa'], ['b', 'bb', 'bbb'], ['c', 'cc', 'ccc']]
+        $.each(arr, function (i, item) {
+            console.info(i); //把二维数组中的当做一维数组遍历，元素是内部的一维数组，此处将输出为0，1，2
+            console.info(item); //将输出为 ['a', 'aa', 'aaa']，['b', 'bb', 'bbb']，['c', 'cc', 'ccc']
+        });
+
+        //因此想要得到一个二维数组中的每个单独的元素就需要将拿到的item再用$.each()进行一维数组的循环
+
+        var arr = [['a', 'aa', 'aaa'], ['b', 'bb', 'bbb'], ['c', 'cc', 'ccc']]
+        $.each(arr, function (i, item) {
+            $.each(item, function (j, val) {
+                console.info(j); //将输出为0，1，2，0，1，2，0，1，2
+                console.info(val); //将输出为a，aa，aaa，b，bb，bbb，c，cc，ccc
+            });
+        });
+
+
+        // 遍历DOM元素
+        $.each($("input:hidden"), function (i, val) {
+            console.info(val); //将输出[object HTMLInputElement]，因为它是一个表单元素
+            console.info(i);   //将输出为0，1，2，3
+            console.info(val.name);  //将输出aaa,bbb,ccc,ddd，如果使用this.name将输出同样的结果
+            console.info(val.value); //将输出111,222,333,444，如果使用this.value将输出同样的结果
+        });
+
+        //当然，这段代码也可以写成这样：
+
+        $("input:hidden").each(function (i, val) {
+            console.info(i);
+            console.info(val.name);
+            console.info(val.value);
+        });
+    </script>
+</body>
+
+</html>

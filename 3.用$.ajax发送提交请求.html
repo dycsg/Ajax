@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery.min.js"></script>
+</head>
+<body>
+    <button id="btn">用get发送请求</button>
+    <button id="btns">用post提交数据</button>
+    <script>
+        $(function() {
+            $("#btn").click(function(){
+                $.ajax({
+                    type: "get",       //类型
+                    url: "http://www.liulongbin.top:3006/api/getbooks",    // 地址
+                    data: {id: 1},    // id: 1      
+                    success: function (sre) {           // 回调函数
+                        console.log(sre);
+                    }
+                })
+            })   
+
+
+            $("#btns").click(function(){
+                $.ajax({
+                    type: "post",
+                    url: "http://www.liulongbin.top:3006/api/addbook",
+                    data: {
+                        bookname: "谁武d装",
+                        author: "输出呢",
+                        publisher: "添加俗话还"
+                    },
+                    success: function (sres) {
+                        console.log(sres);
+                    }
+                })
+            });
+        })
+    </script>
+</body>
+</html>

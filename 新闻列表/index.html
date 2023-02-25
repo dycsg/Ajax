@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="./index.js"></script>
+    <script src="/js/template-web.js"></script>
+</head>
+
+<body style="padding: 15px;">
+    <!-- 容器 -->
+    <div id="news-list"></div>
+
+    <!-- 模板 -->
+    <script type="text/html" id="tpl-news">
+    <!-- {{data.length}}
+    查看是否获取长度，用标签的形式循环每一个数据 -->
+    {{each.data}}       
+    <div class="box">
+        <img src="{{'http://www.liulongbin.top:3006' + $value.img}}" alt="">
+        <!-- 接口地址加属性 -->
+        <div class="boxs">
+            <h2>{{$value.title}}</h2>
+
+            <div class="max">
+                {{each.$value.tags}}
+                <span class="yys">{{$value}}</span>
+                {{/each}}
+            </div>
+
+            <div class="min">
+                <span class="name">{{$value.source}}</span>
+                <span class="Date">{{$value.time}}</span>
+                <span class="pls">评论数:{{$value.cmtcount}}</span>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    </script>
+</body>
+
+</html>

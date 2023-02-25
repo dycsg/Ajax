@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 新建一个
+        var fd = new FormData()
+        // 添加数据
+        fd.append('uname', 'zs')
+        fd.append('psswd', '1234')
+
+        var xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://www.liulongbin.top:3006/api/formdata')
+        xhr.send(fd)    //因为数据在fd里面所有直接把fd传进去
+
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState === 4 && xhr.status === 200){
+                console.log(JSON.parse(xhr.responseText));
+            }
+        }
+    </script>
+</body>
+</html>

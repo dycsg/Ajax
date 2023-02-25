@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery.min.js"></script>
+</head>
+
+<body>
+    <button id="btnPost">用post提交数据</button>
+    <script>
+        $(function () {
+            $('#btnPost').click(function () {               //url地址要换成add
+                $.post('http://www.liulongbin.top:3006/api/addbook',
+                    {   //要提交数据       
+                        bookname: "谁武装",
+                        author: "输出呢",
+                        publisher: "添加俗话还"
+                    }, function (sre) {       // 回调函数
+                        console.log(sre);
+                    })
+            })
+        })
+    </script>
+</body>
+
+</html>

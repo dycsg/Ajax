@@ -1,0 +1,70 @@
+Ajax 能让我们轻松实现 网页 于 服务器之间的数据交互
+
+XMLHttpRequest 访问网页数据必要的对象      简单的用法：var xhrObj = new XMLHttpRequest()         重要、
+
+get 请求 向服务器要资源
+post 请求 （向）往服务器提交发送数据
+
+jQuery的Ajax
+$.get() 向服务器要数据         必要参数 url 类型：string    可选参数 data携带的参数 object       function()回调函数 
+$.post() 向服务器提交数据      必要参数 url 类型：string    可选参数 data提交的数据 object       callback()回调函数
+
+$.ajax() 既可以向服务器要数据 也可以提交数据
+使用的方法：$.ajax ( {
+type: "请求的方式，例如get或post"
+url: "请求的地址"       
+data: { } 这次请求要携带的数据   // id= 1
+success: function (res) { }  请求成功之后的回调函数})
+
+url就是接口
+
+join() 方法用于数组中元素的连接
+ecah() 用于循环
+
+var arr1 = [ "aaa", "bbb", "ccc" ];
+$.each(arr1, function(i,val){
+    console.info(i); //这里是索引值，将输出0，1，2
+    console.info(val); //这里是元素值，将输出aaa，bbb，ccc
+});
+
+
+form 表单属性
+action = 指定的url地址 或者页面
+_blank = 在新建一个窗口页面打开
+_self = 默认的 在相同的页面 或者框架 打开
+
+method  等于$Ajax 中的type 类型  两个值 get post
+enctype 涉及到要用form 上传文件的操作 则要将它的值设置成 multipart/form-data
+        不要用form 上传文件的操作 则用默认值 application/x-www-form-urlencoded
+
+阻止 action 跳转 给函数一个形参(e)    e.preventDefault()  阻止跳转
+
+push() 向数组末尾添加一个获取多个元素 返回新的长度
+join() 连接元素
+trim() 减去空格
+serialize() 获取数据
+exec() 检索字符串 正则 判断 失败返回null
+
+encodeURL() 编码的函数
+decodeURl() 解码的函数
+
+
+json数据类型   必须用花括号{}
+      //错误的
+{          
+    name: "zs",
+    'age': 20,
+    "gender": '男',
+    "address": undefined,
+    "hobby": ["吃饭", "睡觉", '打豆豆'],
+    say: function() {}
+}
+// 正确的   所有的 属性 和 属性值 加双引号""
+{          
+    "anem": "zs",
+    "age": 20,         
+    "gender": "男",
+    "address": null,    //没有的值要用空null
+    "hobby": ["吃饭", "睡觉", "打豆豆"],
+    //不能有函数
+}

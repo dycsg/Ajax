@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery.min.js"></script>
+</head>
+<body>
+    <button id="btn">用$.get()发送不带参数的请求</button>
+
+    <button id="btns">用$.get()发送带参数的请求</button>
+
+    <script>
+        $(function(){
+            // 发送不带参数的请求
+            $('#btn').click(function(){
+                $.get("http://www.liulongbin.top:3006/api/getbooks", function(data){
+                    console.log(data);
+                })
+            })
+
+
+            //发送带参数的请求
+            $('#btns').on('click', function(){                      //获取id为1的数据
+                $.get('http://www.liulongbin.top:3006/api/getbooks', {id: 1}, function(sre){
+                    console.log(sre);
+                })
+            })
+        })
+    </script>
+</body>
+</html>
